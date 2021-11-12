@@ -9,7 +9,7 @@ const pngCrop = require("png-crop");
 
 // Server stuff
 const app = express();
-const port = 3000;
+const port = 443;
 
 // Movie stuff
 const pathToMovie = "D:/Downloads/YP-1N-G5-ANewGeneration.mkv";
