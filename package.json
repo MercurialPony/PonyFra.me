@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "ffmpeg-extract-frame": "^1.0.2",
+    "ffmpeg-extract-frames": "^2.0.2",
+    "png-crop": "^0.0.2"
+  }
+}

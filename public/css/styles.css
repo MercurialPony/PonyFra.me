@@ -1,0 +1,200 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html,
+body {
+	height: 100%;
+}
+body,
+input {
+	font: 300 18px/1.2 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+	background-size: cover;
+	background-position: center center;
+}
+a {
+	text-decoration: none;
+	color: #222;
+}
+a:hover {
+	color: #111;
+}
+a:focus {
+	outline: none;
+}
+input {
+	display: block;
+	width: 335px;
+	font-size: 34px;
+	line-height: 44px;
+	background: transparent;
+	border: none;
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.4);
+	padding: 5px 0;
+	border-radius: 0;
+}
+input:focus {
+	border-bottom-color: #000;
+	outline: none;
+}
+.c {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.2;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+#wrap {
+	width: 340px;
+	height: 125px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -62.5px -170px;
+}
+.randbtn {
+	position: absolute;
+	right: 12px;
+	top: 12px;
+	bottom: 12px;
+	cursor:pointer;
+}
+.randbtn:active {
+	transform: translateY(2px);
+}
+#seconds {
+	margin-bottom: 15px;
+}
+.btn {
+	display: inline-block;
+	max-width: 100%;
+	height: 32px;
+	font: bold 13px/29px "Helvetica Neue", Helvetica, sans-serif;
+	color: #222;
+	background-color: transparent;
+	border: 1px solid #222;
+	padding: 0 8px;
+	cursor:pointer;
+}
+.btn:active {
+	transform: translateY(2px);
+}
+.go,
+.copy {
+	width: 160px;
+}
+.btn:focus,
+.btn:hover,
+.btn:active {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+.btn svg {
+	position: relative;
+	top: 2px;
+	margin-right: 1px;
+	fill: #222;
+}
+.feedback a {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+.manechat {
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+}
+.logo {
+	position: absolute;
+	left: 50%;
+	bottom: 20px;
+	width: 30px;
+	height: 46px;
+	margin-left: -15px;
+}
+.oh a {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 60px;
+	font-weight: 200;
+	line-height: 80px;
+	text-align: center;
+	z-index: 1;
+}
+.oh a span {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	margin-top: -40px;
+}
+.light {
+	color: #222!important;
+}
+.light input {
+	color: #222!important;
+	border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+.light input:focus {
+	border-bottom-color: #000;
+}
+.dark .c {
+	color: #fff;
+}
+.dark .c:hover {
+	color: #ccc;
+}
+.dark input {
+	color: #fff!important;
+	border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+.dark input:focus {
+	border-bottom-color: #fff;
+}
+.dark .btn {
+	color: #fff;
+	border-color: #fff;
+}
+.dark .btn:hover {
+	background-color: rgba(255, 255, 255, 0.15);
+}
+.dark svg {
+	fill: #fff;
+}
+.dark ::-webkit-input-placeholder {
+	color: #fff!important;
+}
+.dark :-moz-placeholder {
+	color: #fff!important;
+}
+.dark ::-moz-placeholder {
+	color: #fff!important;
+}
+.dark :-ms-input-placeholder {
+	color: #fff!important;
+}
+::-webkit-input-placeholder {
+	color: #222;
+}
+:-moz-placeholder {
+	color: #222;
+}
+::-moz-placeholder {
+	color: #222;
+}
+:-ms-input-placeholder {
+	color: #222;
+}
