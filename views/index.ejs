@@ -7,8 +7,15 @@
 		<link rel="icon" type="image/png" href="/img/favicon.png">
 
 		<meta property="og:title" content="PonyFrame">
-		<meta property="og:description" content="Pick frames from the MLP: ANG movie!">
-		<meta property="og:image" content="<%=locals.image%>">
+		
+		<% if(locals.image) { %>
+			<meta property="og:description" content="Frame at second #<%=locals.input%> from the MLP: ANG movie! -- Made by MercurialPone (izzy supremacy#2014)">
+			<meta property="og:image" content="<%=locals.image%>">
+			<meta name="twitter:card" content="summary_large_image">
+		<% } else { %>
+			<meta property="og:description" content="Pick frames from the MLP: ANG movie! -- Made by MercurialPone (izzy supremacy#2014)">
+		<% } %>
+
 
 		<link rel="stylesheet" type="text/css" href="/css/fonts.css" />
 		<link rel="stylesheet" href="/css/styles.css">

@@ -5,15 +5,23 @@ const express = require("express");
 const extractFrames = require("ffmpeg-extract-frames");
 const pngCrop = require("png-crop");
 
+// Command line args
+
+if(!fs.existsSync(process.argv[2]))
+{
+	console.log("Movie file %s does not exist!", process.argv[2]);
+	return;
+}
+
 // Constants
 
 // Server stuff
 const app = express();
-const port = 443;
+const port = 443; // FIXME config for this
 
 // Movie stuff
-const pathToMovie = "D:/Downloads/YP-1N-G5-ANewGeneration.mkv";
-const duration = 5489;
+const pathToMovie = process.argv[2];
+const duration = 5489; // FIXME this should be sent from the server and also calculated!
 
 // Other
 const frames = new Array(duration).fill(false);
@@ -42,7 +50,7 @@ app.get("/:second", async (req, res) =>
 	let second = +input;
 	let image = "";
 
-	console.log("Received request from %s for %s", req.ip, input);
+	console.log("%s - Received request from %s for %s", new Date().toLocaleString("en-US"), req.ip, input);
 
 	if(isValidFrame(second))
 	{

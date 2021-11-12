@@ -1,6 +1,5 @@
 // Page stuff
 
-// FIXME this should be sent from the server
 const duration = 5489;
 
 function keyDownWhileTyping(e)
