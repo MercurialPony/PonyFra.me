@@ -158,7 +158,7 @@ const crop = util.promisify(pngCrop.crop);
 
 function isValidFrame(second)
 {
-	if(isNaN(second))
+	if(isNaN(second) || second % 1 !== 0) // or is a decimal
 	{
 		return false;
 	}
