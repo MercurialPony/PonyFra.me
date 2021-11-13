@@ -55,6 +55,8 @@ app.get("/", (req, res) =>
 {
 	console.log("%s - Received request from %s for %s", new Date().toLocaleString("en-US"), req.ip, "main page");
 
+	recordRequestAnalytics(req);
+
 	res.status(200).render("index", { image: "", input: "" });
 
 	console.log("Response sent");
@@ -68,6 +70,8 @@ app.get("/:second", async (req, res) =>
 	let image = "";
 
 	console.log("%s - Received request from %s for %s", new Date().toLocaleString("en-US"), req.ip, input);
+
+	recordRequestAnalytics(req);
 
 	if(isValidFrame(second))
 	{
@@ -115,7 +119,7 @@ https
 	{
 		cert: fs.readFileSync(path.join(pathToSsl, "ponyfra_me.crt")),
 		key: fs.readFileSync(path.join(pathToSsl, "ponyfra_me.key")),
-		ca: fs.readFileSync(path.join(pathToSsl, "ponyfra_me.ca-bundle"));
+		ca: fs.readFileSync(path.join(pathToSsl, "ponyfra_me.ca-bundle"))
 	}, app)
 	.listen(443, () =>
 	{
@@ -129,9 +133,9 @@ function recordRequestAnalytics(req)
 	let requestAnalytics = { requests: [] };
 	let pathToRequestAnalytics = path.join(pathToAnalytics, "requests.json");
 
-	if(!fs.existsSync(pathToRequestAnalytics))
+	if(fs.existsSync(pathToRequestAnalytics))
 	{
-		requestAnalytics = JSON.parse(pathToRequestAnalytics);
+		requestAnalytics = JSON.parse(fs.readFileSync(pathToRequestAnalytics));
 	}
 
 	requestAnalytics.requests.push(
