@@ -1,6 +1,7 @@
 const fs = require("fs");
 const util = require("util");
 const path = require("path");
+const https = require("https");
 const express = require("express");
 const extractFrames = require("ffmpeg-extract-frames");
 const pngCrop = require("png-crop");
@@ -15,9 +16,14 @@ if(!fs.existsSync(process.argv[2]))
 
 // Constants
 
+// Private stuff
+
+const pathToSsl = path.join(__dirname, "private", "ssl");
+const pathToAnalytics = path.join(__dirname, "private", "analytics");
+
 // Server stuff
 const app = express();
-const port = 443; // FIXME config for this
+const redirectApp = express();
 
 // Movie stuff
 const pathToMovie = process.argv[2];
@@ -30,13 +36,24 @@ const frames = new Array(duration).fill(false);
 
 // Server logic
 
+redirectApp.get("*", (req, res) =>
+{
+	res.redirect("https://" + req.headers.host + req.url);
+});
+
+redirectApp.listen(80, () =>
+{
+	console.log("Listening on port 80!");
+	console.log();
+});
+
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) =>
 {
-	console.log("Received request from %s for main page", req.ip);
+	console.log("%s - Received request from %s for %s", new Date().toLocaleString("en-US"), req.ip, "main page");
 
 	res.status(200).render("index", { image: "", input: "" });
 
@@ -93,11 +110,41 @@ app.get("/:second", async (req, res) =>
 	console.log();
 });
 
-app.listen(port, () =>
+https
+	.createServer(
+	{
+		cert: fs.readFileSync(path.join(pathToSsl, "ponyfra_me.crt")),
+		key: fs.readFileSync(path.join(pathToSsl, "ponyfra_me.key")),
+		ca: fs.readFileSync(path.join(pathToSsl, "ponyfra_me.ca-bundle"));
+	}, app)
+	.listen(443, () =>
+	{
+		console.log("Listening on port 443!");
+		console.log();
+	});
+
+
+function recordRequestAnalytics(req)
 {
-	console.log("Listening on port %s!", port);
-	console.log();
-});
+	let requestAnalytics = { requests: [] };
+	let pathToRequestAnalytics = path.join(pathToAnalytics, "requests.json");
+
+	if(!fs.existsSync(pathToRequestAnalytics))
+	{
+		requestAnalytics = JSON.parse(pathToRequestAnalytics);
+	}
+
+	requestAnalytics.requests.push(
+	{
+		ip: req.ip,
+		timestamp: Date.now(),
+		localtime: new Date().toLocaleString("en-US"),
+		input: req.params.second,
+		fullinput: req.originalUrl
+	});
+
+	fs.writeFileSync(pathToRequestAnalytics, JSON.stringify(requestAnalytics), err => console.log(err));
+}
 
 
 
