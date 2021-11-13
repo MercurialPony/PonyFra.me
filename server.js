@@ -77,10 +77,10 @@ app.get("/:second", async (req, res) =>
 	{
 		image = "/img/" + second + ".png";
 
-		frames[second] = true;
-
 		if(!frames[second])
 		{
+			frames[second] = true;
+
 			let pathToFile = path.join(__dirname, "public", "img", second + ".png");
 
 			console.log("%s is not cached.. Try to find it in %s", second, pathToFile);
